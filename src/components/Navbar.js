@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from 'react-redux'
+
 const Navbar = () => {
 
   return (
@@ -18,4 +20,6 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default connect(map) (Navbar);
+// 1. map state to props
+// 2. map dispatch to props
