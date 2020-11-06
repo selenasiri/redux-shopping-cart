@@ -15,20 +15,31 @@ import {createStore} from 'redux';
 
 // initial store
 const initialStore = {
-  count: 78
+  count: 0
 };
 // reducer 
 function reducer(state, action) {
-  console.log({state, action}); // action is undefined, so for here redux passes a default action
+  console.log({state, action}); 
   if(action.type === "DECREASE") {
     console.log("hey it actually worked")
-    return { count: state.count -1} //creates a new object without mutating the old one
+    return { count: state.count -1} 
   }
-  return state; // return the state before the update
+  if(action.type === "INCREASE") {
+    console.log("hey it actually worked")
+    return { count: state.count +1} 
+  }
+  if(action.type === "RESET") {
+    console.log("hey it actually worked")
+    return { count: 0} 
+  }
+  return state; 
 }
 // store
 const store = createStore(reducer, initialStore); // but now the initialState is 'count'.
 store.dispatch({type: "DECREASE"})
+store.dispatch({type: "INCREASE"})
+store.dispatch({type: "INCREASE"})
+store.dispatch({type: "RESET"})
 console.log(store.getState());
 
 function App() {
