@@ -8,38 +8,22 @@ import cartItems from "./cart-items";
 // redux stuff
 
 import {createStore} from 'redux';
-
-
-
-
-
+import {DECREASE, INCREASE} from './actions'
+import reducer from './reducer'
 // initial store
 const initialStore = {
-  count: 0
+  count: 0,
+  name: 'john'
 };
-// reducer 
-function reducer(state, action) {
-  console.log({state, action}); 
-  if(action.type === "DECREASE") {
-    console.log("hey it actually worked")
-    return { count: state.count -1} 
-  }
-  if(action.type === "INCREASE") {
-    console.log("hey it actually worked")
-    return { count: state.count +1} 
-  }
-  if(action.type === "RESET") {
-    console.log("hey it actually worked")
-    return { count: 0} 
-  }
-  return state; 
-}
+
 // store
 const store = createStore(reducer, initialStore); // but now the initialState is 'count'.
-store.dispatch({type: "DECREASE"})
-store.dispatch({type: "INCREASE"})
-store.dispatch({type: "INCREASE"})
-store.dispatch({type: "RESET"})
+store.dispatch({type: DECREASE});
+
+store.dispatch({type: INCREASE});
+store.dispatch({type: INCREASE});
+store.dispatch({type: INCREASE});
+store.dispatch({type: INCREASE});
 console.log(store.getState());
 
 function App() {
