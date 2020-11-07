@@ -1,9 +1,16 @@
-import React from "react";
+import React from "react"
+import { useSelector, useDispatch} from 'react-redux'
+import { clearCart } from '../actions/cart'
 import CartItem from "./CartItem";
-import { connect} from 'react-redux'
-import { CLEAR_CART } from '../actions'
-const CartContainer = ({ cart = [], total, dispatch }) => {
-  if (cart.length === 0) {
+
+const CartContainer = () => {
+  const dispatch = useDispatch()
+
+  const {cart, total} = useSelector(state => state.shoppingCart)
+  
+  console.log(cart, total)
+
+  if (!cart || cart.length === 0) {
     return (
       <section className="cart">
         {/* cart header */}
@@ -14,6 +21,7 @@ const CartContainer = ({ cart = [], total, dispatch }) => {
       </section>
     );
   }
+
   return (
     <section className="cart">
       {/* cart header */}
@@ -34,14 +42,10 @@ const CartContainer = ({ cart = [], total, dispatch }) => {
             total <span>${total}</span>
           </h4>
         </div>
-        <button className="btn clear-btn" onClick={() => dispatch({type: CLEAR_CART })}>clear cart</button>
+        <button className="btn clear-btn" onClick={() => dispatch(clearCart())}>clear cart</button>
       </footer>
     </section>
   );
 };
 
-function mapStateToProps() {
-  const {cart, total} = store
-  return {cart, total}
-}
-export default connect(mapStateToProps)(CartContainer);
+export default CartContainer
